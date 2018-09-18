@@ -72,6 +72,8 @@ x <- model.matrix(Salary ~., Hitters)[,-1]
 # creat and plot lasso
 lasso.mod <- glmnet(x, y, alpha = 1)
 #plot(lasso.mod, xvar = "lambda", lwd = 2)
+
+# save image and place in markdown so it will show up in markdown file on github
 dev.copy(png, "lassoco.png", width=8, height=6, units="in", res=100)
 ```
 
@@ -110,10 +112,21 @@ Next, we want to find the optimal value of the regularization penalty using cros
 ``` r
 # use cv to find optimal value of penalty
 cv.lasso = cv.glmnet(x, y, alpha = 1)
-plot(cv.lasso)
+#plot(cv.lasso)
+
+# save image and place in markdown so it will show up in markdown file on github
+dev.copy(png, "lassocv.png", width=8, height=6, units="in", res=100)
 ```
 
-![](anly590_HW0_Archer_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png)
+    ## quartz_off_screen 
+    ##                 3
+
+``` r
+dev.off()
+```
+
+    ## quartz_off_screen 
+    ##                 2
 
 ``` r
 cv.lasso$lambda[28]
@@ -140,6 +153,8 @@ coef(lasso.mod)[,28]
     ##       Assists        Errors 
     ##  0.000000e+00  0.000000e+00
 
+![Lasso CV](lassocv.png)
+
 The MSE, or mean squared error, sharply increases at around a value of 3 for log(lambda). So the optimal value is approximately *λ* = 20.7. In the plot it is clear that this corresponds to 6 predictors left in the model. The code above also shows that at this value of *λ* there are 6 predictors.
 
 1.2
@@ -151,18 +166,43 @@ Ridge
 ``` r
 # visualize ridge coef trajectories
 ridge.mod <- glmnet(x, y, alpha = 0)
-plot(ridge.mod, xvar = "lambda", lwd = 2)
+#plot(ridge.mod, xvar = "lambda", lwd = 2)
+# save image and place in markdown so it will show up in markdown file on github
+dev.copy(png, "ridgeco.png", width=8, height=6, units="in", res=100)
 ```
 
-![](anly590_HW0_Archer_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-4-1.png)
+    ## quartz_off_screen 
+    ##                 3
+
+``` r
+dev.off()
+```
+
+    ## quartz_off_screen 
+    ##                 2
+
+![Ridge Trajectories](ridgeco.png)
 
 ``` r
 # find optimal penalty
 cv.lasso = cv.glmnet(x, y, alpha = 0)
-plot(cv.lasso)
+#plot(cv.lasso)
+
+# save image and place in markdown so it will show up in markdown file on github
+dev.copy(png, "ridgecv.png", width=8, height=6, units="in", res=100)
 ```
 
-![](anly590_HW0_Archer_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-4-2.png)
+    ## quartz_off_screen 
+    ##                 3
+
+``` r
+dev.off()
+```
+
+    ## quartz_off_screen 
+    ##                 2
+
+![Ridge CV](ridgecv.png)
 
 The optimal value for *λ* in the ridge model appears to be pretty simlar.
 
