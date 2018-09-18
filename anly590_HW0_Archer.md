@@ -71,10 +71,21 @@ x <- model.matrix(Salary ~., Hitters)[,-1]
 
 # creat and plot lasso
 lasso.mod <- glmnet(x, y, alpha = 1)
-plot(lasso.mod, xvar = "lambda", lwd = 2)
+#plot(lasso.mod, xvar = "lambda", lwd = 2)
+dev.copy(png, "lassoco.png", width=8, height=6, units="in", res=100)
 ```
 
-![](anly590_HW0_Archer_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-1-1.png)
+    ## quartz_off_screen 
+    ##                 3
+
+``` r
+dev.off()
+```
+
+    ## quartz_off_screen 
+    ##                 2
+
+![Lasso Trajectories](lassoco.png)
 
 From the trajectories of the coefficients in the mode, we can obtain an idea of how the lasso is doing variable selection. The penalty parameter is forcing the coefficients towards 0.
 
