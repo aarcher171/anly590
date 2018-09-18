@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Lasso
 
-```{r}
+```{r, echo=TRUE}
 # the Hitters dataset is in the ISLR package
 library(ISLR)
 library(glmnet)
@@ -37,7 +37,7 @@ plot(lasso.mod, xvar = "lambda", lwd = 2)
 
 From the trajectories of the coefficients in the mode, we can obtain an idea of how the lasso is doing variable selection. The penalty parameter is forcing the coefficients towards $0$.
 
-```{r}
+```{r, echo=TRUE}
 # find last 3 predictors in model
 coef(lasso.mod)[,5]
 ```
@@ -46,7 +46,7 @@ The last $3$ variables in the model are Hits, CRuns, and CRBI.
 
 Next, we want to find the optimal value of the regularization penalty using cross validation.
 
-```{r}
+```{r, echo=TRUE}
 # use cv to find optimal value of penalty
 cv.lasso = cv.glmnet(x, y, alpha = 1)
 plot(cv.lasso)
@@ -63,7 +63,7 @@ The MSE, or mean squared error, sharply increases at around a value of $3$ for l
 
 # Ridge
 
-```{r}
+```{r, echo=TRUE}
 # visualize ridge coef trajectories
 ridge.mod <- glmnet(x, y, alpha = 0)
 plot(ridge.mod, xvar = "lambda", lwd = 2)
